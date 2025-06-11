@@ -1,6 +1,6 @@
 import { Router } from "express";
-// import validateBody from "../middleware/validateBody.js";
-import { categorySchema } from "../zod/schemas";
+import validateBody from "../middleware/validateBody.js";
+import { categorySchema } from "../zod/schemas.js";
 import {
     getCategories,
     createCategory,
