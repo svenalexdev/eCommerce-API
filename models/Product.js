@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+import { Schema, model } from 'mongoose';
 
 const productSchema = new Schema({
   name: { type: String, required: [true, 'Product name is requires'] },
@@ -8,5 +9,7 @@ const productSchema = new Schema({
   categoryId: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
   createAt: { type: Date, default: Date.now }
 });
+
+export default model('Product', productSchema);
 
 export default model('Product', productSchema);
