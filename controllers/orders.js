@@ -8,7 +8,6 @@ const getOrders = async (req, res) => {
   res.json(orders);
 };
 
-// Validate w/ Garrett
 const createOrder = async (req, res) => {
   const { userId } = req.sanitizedBody;
 
