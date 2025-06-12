@@ -1,13 +1,15 @@
 import express from 'express';
 import './db/index.js';
-import userRouter from './router/userRouter.js';
-import productRouter from './router/productRouter.js';
+import userRouter from './routers/userRouter.js';
+import productRouter from './routers/productRouter.js';
+import categoryRouter from './routers/categoryRouter.js';
 
 const app = express();
 const port = process.env.PORT || 8080;
 
 app.use(express.json());
 
+app.use('/categories', categoryRouter);
 app.use('/users',userRouter);
 app.use('/products',productRouter);
 

@@ -7,7 +7,7 @@ const getCategories = async (req, res) => {
 };
 
 const createCategory = async (req, res) => {
-    // const {name} = req.sanitizedBody;
+    const {name} = req.sanitizedBody;
     const found = await Category.findOne({ name });
     if (found) throw new Error("Name already exists", { cause: 400 });
     const category = await Category.create(req.sanitizedBody);
