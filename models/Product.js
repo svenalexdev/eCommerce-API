@@ -5,7 +5,7 @@ const productSchema = new Schema({
   description: { type: String, requires: [true, "Description is required"] },
   price: { type: Number, required: [true, "Price is required"] },
   categoryId: { type: Number, required: true, unique: true, integer: true },
-  createAr: { type: Date, default: Date.now },
+  createAt: { type: Date, default: Date.now },
 });
 
 export default model('Peoduct',productSchema);
