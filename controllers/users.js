@@ -1,5 +1,6 @@
 import { isValidObjectId } from "mongoose";
 import User from "../models/User.js";
+import * as bcrypt from 'bcrypt';
 
 const getUsers = async (req, res) => {
   const users = await User.find();
@@ -7,13 +8,15 @@ const getUsers = async (req, res) => {
 };
 
 const createUser = async (req, res) => {
-  const { email } = req.sanitizedBody;
+  const { email,password } = req.sanitizedBody;
 
   const found = await User.findOne({ email });
 
   if (found) throw new Error("Email already exist", { cause: 400 });
 
-  const user = await User.create(req.sanitizedBody);
+  const hashedpassword =await bcrypt.hash(password,10);
+  
+  const user = await User.create({...req.sanitizedBody,password:hashedpassword});
   res.json(user);
 };
 

@@ -1,5 +1,6 @@
 import { isValidObjectId } from 'mongoose';
 import Product from '../models/Product.js';
+import Category from '../models/Category.js';
 
 const getProduct = async (req, res) => {
   const product = await Product.find();
@@ -9,9 +10,11 @@ const getProduct = async (req, res) => {
 const createProduct = async (req, res) => {
   const { categoryId } = req.sanitizedBody;
 
-  const found = await Product.findOne({ categoryId });
+  const found = await Category.findById( categoryId );
 
-  if (found) throw new Error('Category id already exists', { cause: 400 });
+  if (!found) {
+     return res.status(400).json({message:'Category ID does not exist'});
+  }
 
   const product = await Product.create(req.sanitizedBody);
   res.json(product);
