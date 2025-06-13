@@ -1,4 +1,6 @@
 import Order from '../models/Order.js';
+import User from '../models/User.js';
+// import Product from '../models/Product.js';
 import { isValidObjectId } from 'mongoose';
 
 const getOrders = async (req, res) => {
@@ -6,7 +8,6 @@ const getOrders = async (req, res) => {
   res.json(orders);
 };
 
-// Validate w/ Garrett
 const createOrder = async (req, res) => {
   const { userId } = req.sanitizedBody;
 
@@ -18,13 +19,12 @@ const createOrder = async (req, res) => {
   res.status(201).json(order);
 };
 
-// Check: still populate here, since references are already in the body?
 const getOrderById = async (req, res) => {
   const { id } = req.params;
 
   if (!isValidObjectId(id)) throw new Error('Invalid id', { cause: 400 });
 
-  const order = await Order.findById(id).lean();
+  const order = await Order.findById(id).lean().populate('userId').populate('products.productId');
 
   if (!order) throw new Error('Order not found', { cause: 404 });
 

@@ -27,7 +27,7 @@ const orderSchema = z.object({
       })
     )
     .min(1, 'At least one product is required'),
-  total: z.number().min(0, 'Total cannot be negative')
+  // total: z.number().min(0, 'Total cannot be negative')
 });
 
 export { userSchema, productSchema, categorySchema, orderSchema };

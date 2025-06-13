@@ -17,12 +17,12 @@ const orderSchema = new Schema({
         type: Number,
         required: [true, 'Quantity is required']
       }
-    }
-  ],
-  total: {
-    type: Number,
-    required: true
-  }
+    }]
+  // ],
+  // total: {
+  //   type: Number,
+  //   required: true
+  // }
 });
 
 export default model('Order', orderSchema);
